@@ -14,6 +14,7 @@ namespace KitchenSink.Controllers
         //Drink drink = new Drink();
         //List<Drink> drinkList = new List<Drink>();
         //private JsonDocument jDoc;
+        //random garbage to test push
         Random random = new Random();
         
         // 3/8/2020 edits using JsonPropertyName
