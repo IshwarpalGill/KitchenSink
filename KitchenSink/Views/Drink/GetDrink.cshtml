@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "GetDrink";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--We use razor to help collect the list that has been passed to us from the Home Controller-->
+@model DrinkArray
+<!--This small form is to take userinput and help display a new list of items based on the entry.
+    It curretly is not functioning properly-->
+<form asp-controller="Drink" asp-action="GetDrink">
+    <label for="charLet">Enter A Letter</label>
+    <input type="text" id="charLet" name="charLet"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+<!--This table is used to display the data from the list-->
+<table class=" table table-striped">
+    <tr>
+        <th style="text-align:left" class="align-middle"><h2>Drink Id</h2></th>
+        <th style="text-align:left" class="align-middle"><h2>Drink Name</h2></th>
+        <th style="text-align:left" class="align-middle"><h2>Drink Category</h2></th>
+    </tr>
+    <!--We us a foreach loop to iterate through the list and display the properties as needed-->
+    @foreach (Drink drink in Model.Drinks)
+    {
+        <tr>
+            <td>@drink.Id</td>
+            <td>@drink.Name</td>
+            <td>@drink.Category</td>
+        </tr>
+    }
+</table>

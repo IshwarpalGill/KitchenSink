@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "GetRandomRecipe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--We use razor to help collect the list that has been passed to us from the Home Controller-->
+@model RecipeArray
+<!--This table is used to display the data from the list-->
+<table class=" table table-striped">
+    <tr>
+        <th style="text-align:left" class="align-middle"><h2>Recipe Id</h2></th>
+        <th style="text-align:left" class="align-middle"><h2>Recipe Name</h2></th>
+    </tr>
+
+    <!--We us a foreach loop to iterate through the list and display the properties as needed-->
+    @foreach (Recipes recipes in Model.TitleOfRecipe)
+    {
+        <tr>
+            <td>@recipes.Id</td>
+            <td>@recipes.Title</td>
+        </tr>
+    }
+</table>
