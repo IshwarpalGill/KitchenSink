@@ -1,10 +1,40 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+.navigation-bar {
+    background-color: oldlace;
+    opacity: .6;
+}
 
+body {
+    background-image: url(https://www.furninova.com/sites/default/files/styles/social_media/public/fur/en/product/paso-doble-night/lifestyle-images/paso-doble-without-joy-chair.jpg?itok=pUgKQvdm)
+}
+
+.nav-icon {
+    height: 62px;
+    width: 62px;
+}
+
+.navbar-brand {
+    font-family: Bellota;
+    color: black;
+    font-weight: 600;
+    font-size: 24px;
+}
+.navigation-link {
+    color: black;
+    font-family: Bellota Text;
+    font-weight: 400;
+    font-size: 18px;
+    padding-top: 18px;
+}
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+.home-page-title, .home-page-subtitle {
+    color: white;
 }
 
 /* Provide sufficient contrast against white background */
