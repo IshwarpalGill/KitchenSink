@@ -14,8 +14,6 @@ namespace KitchenSink.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IConfiguration _config;
-
-        //we instantiate contorllers for all our API controllers
         private DrinkController drinkController = new DrinkController();
 
         public HomeController(ILogger<HomeController> logger, IConfiguration config)

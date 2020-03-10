@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace KitchenSink.Models
 {
-    //We created this Model based on the expected results of the The Movie DB.  
-    //Reading documentation and breaking out the Json element, I pulled out some basic properties to help display in the view
     public class Genre
     {
-        //public Genre() { }
-        //public Genre(string id, string name)
-        //{
-        //    Id = id;
-        //    Name = name;
-        //}
+        public Genre() { }
+        public Genre(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
         [JsonPropertyName("id")]
         public int Id { get; set; }
         [JsonPropertyName("name")]
