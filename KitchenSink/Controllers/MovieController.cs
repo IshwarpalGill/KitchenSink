@@ -20,6 +20,10 @@ namespace KitchenSink.Controllers
         {
             _config = config;
         }
+        public IActionResult GetStarted()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> GetGenre()
         {

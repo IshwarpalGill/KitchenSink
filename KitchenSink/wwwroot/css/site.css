@@ -2,7 +2,27 @@
 for details on configuring this project to bundle and minify static web assets. */
 .navigation-bar {
     background-color: oldlace;
+    opacity: .8;
+}
+
+.table {
+    background-color: oldlace;
     opacity: .6;
+}
+
+.get-started-button {
+    background-color: oldlace;
+    font-family: Playfair Display;
+    font-weight: 200;
+    border-radius: 3px;
+    border: none;
+    font-size: 24px;
+    width: 300px;
+    height: auto;
+    margin-top: 10px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 body {
@@ -33,7 +53,7 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-.home-page-title, .home-page-subtitle {
+.home-page-title, .home-page-subtitle, .drink-input {
     color: white;
 }
 
