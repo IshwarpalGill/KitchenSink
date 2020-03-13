@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Drink";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Drink</h1>
+
+<form asp-controller="Drink" asp-action="GetDrink">
+    <div>
+        <label class="form-group">Enter Alcohol</label>
+        <input type="text" name="alcohol"><br><br>
+        <input type="submit" class="form-control btn btn-primary">
+    </div>
+</form>
