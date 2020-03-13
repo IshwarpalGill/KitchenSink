@@ -14,9 +14,9 @@ namespace KitchenSink.Controllers
     public class RecipesController : Controller
     {
         private IConfiguration _config;
-
         RecipeArray recipe = new RecipeArray();
-
+        private JsonDocument jdoc;
+        Recipes eat = new Recipes();
         public RecipesController(IConfiguration config)
         {
             _config = config;
@@ -26,13 +26,20 @@ namespace KitchenSink.Controllers
             var key = _config["SpoonacularApiKey"];
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync($"https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert&apiKey={key}"))
+                using (var response = await httpClient.GetAsync($"https://api.spoonacular.com/recipes/716429/analyzedInstructions&apiKey={key}"))
                 {
+
                     var stringResponse = await response.Content.ReadAsStringAsync();
-                    recipe = JsonSerializer.Deserialize<RecipeArray>(stringResponse);
+
+                    jdoc = JsonDocument.Parse(stringResponse);
+
+                    foreach (var item in jdoc.RootElement.EnumerateArray())
+                    {
+                        var recipe = JsonSerializer.Deserialize<Recipes>(item.ToString());
+                    }
                 }
+                return View(eat);
             }
-            return View(recipe);
         }
     }
 }
