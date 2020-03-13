@@ -19,7 +19,9 @@ namespace KitchenSink.Controllers
         private IConfiguration _config;
 
         // 3/8/2020 edits using JsonPropertyName
-        RecipeArray recipe = new RecipeArray();
+        RecipeArray recipes = new RecipeArray();
+        List<Recipes> mikeRecipe = new List<Recipes>();
+        Random random = new Random();
 
         public RecipesController(IConfiguration config)
         {
@@ -33,21 +35,41 @@ namespace KitchenSink.Controllers
             {
                 //this using block is the action to get the call.  We have added our key to the end of the request URL per API documentation requirement.
                 //this specific url generates 1 random recipe everytime we call it.
-                using var response = await httpClient.GetAsync($"https://api.spoonacular.com/recipes/findByIngredients?ingredients={protein},+{starch},+{veggie},+{spice},+{aromatic}&number=1&apiKey=[SpoonApiKey]");
+                using var response = await httpClient.GetAsync
+                    ($"https://api.spoonacular.com/recipes/findByIngredients?ingredients={protein},+{starch},+{veggie},+{spice},+{aromatic}&number=5&apiKey={SpoonApiKey}");
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
-                //cookbook = new Recipes
+                JsonDocument jdoc = JsonDocument.Parse(stringResponse);
+        
 
-                //Parses the text representing a single JSON value into an
-                //an instance of the type specified by a generic type parameter
+                foreach (var item in jdoc.RootElement.EnumerateArray())
+                {
+                    var recipes = JsonSerializer.Deserialize<Recipes>(item.ToString());
+                    mikeRecipe.Add(recipes);
+                }
 
-                //cookbook = parsed string response
-                //return as Recipes object
-                //which consists of strings and ints
+                Recipes chosenRecipe;
+                chosenRecipe = mikeRecipe[random.Next(mikeRecipe.Count)];
 
-                recipe = JsonSerializer.Deserialize<RecipeArray>(stringResponse);
+                int recipeId = chosenRecipe.Id;
+                using var response2 = await httpClient.GetAsync
+                    ($"https://api.spoonacular.com/recipes/{recipeId}/information&apiKey={SpoonApiKey}");
+                var stringResponse2 = await response.Content.ReadAsStringAsync();
+
+                JsonDocument jdoc2 = JsonDocument.Parse(stringResponse);
+
+                foreach (var item in jdoc2.RootElement.EnumerateArray())
+                {
+                    var recipes = JsonSerializer.Deserialize<Recipes>(item.ToString());
+                    mikeRecipe.Add(recipes);
+                }
+
+                return View(chosenRecipe);
             }
-            return View(recipe);
+        }
+        public IActionResult TestRandomRecipe()
+        {
+            return View();
         }
     }
 }

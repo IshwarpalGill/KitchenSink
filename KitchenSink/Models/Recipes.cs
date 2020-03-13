@@ -23,11 +23,23 @@ namespace KitchenSink.Models
         public string FoodCategory { get; set; }
         [JsonPropertyName("name")]
         public string IngredientName { get; set; }
+        [JsonPropertyName("image")]
+        public string Image { get; set; }
+
+        public MissedIngredients[] missedIngredients { get; set; }
     }
+
+    public class MissedIngredients
+    {
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+    }
+
+
 
     public class RecipeArray
     {
-        [JsonPropertyName("recipes")]
+        [JsonPropertyName("title")]
         public Recipes[] TitleOfRecipe { get; set; }
     }
 }

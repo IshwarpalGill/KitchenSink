@@ -4,7 +4,43 @@
 
 @model Recipes
 
-<div class="row">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" asp-controller="Recipes" asp-action="GetRandomRecipe">
+                <div class="form-group">
+                    <label>Protein</label>
+                    <input type="text" name="protein" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Starch</label>
+                    <input type="text" name="starch" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Veggies</label>
+                    <input type="text" name="veggies" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Spices</label>
+                    <input type="text" name="spices" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Aromatic</label>
+                    <input type="text" name="aromatic" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Next</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+@*<div class="row">
     <div class="col-md-4">
         <form method="post">
             <div class="form-group">
@@ -35,4 +71,4 @@
             <button type="submit" class="btn btn-primary" asp-controller="Recipes" asp-action="GetRandomRecipe">Next</button>
         </form>
     </div>
-</div>
+</div>*@
