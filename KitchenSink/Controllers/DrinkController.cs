@@ -20,7 +20,7 @@ namespace KitchenSink.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> GetDrink(string alcohol)
+        public async Task<List<Drink>> GetDrink(string alcohol)
         {
             List<Drink> drinkList = new List<Drink>();
             //int num = random.Next(0, 25);
@@ -51,11 +51,11 @@ namespace KitchenSink.Controllers
 
                 }
 
-                chosenDrink = drinkList[random.Next(0, drinkList.Count)];
+                //chosenDrink = drinkList[random.Next(0, drinkList.Count)];
                 //string drinkID = chosenDrink.Id;
                 //var drinkRecieved = RndDrink(drinkList);
             }
-            return View();
+            return drinkList;
         }
         public IActionResult RndDrink(List<Drink> drinkList)
         {
