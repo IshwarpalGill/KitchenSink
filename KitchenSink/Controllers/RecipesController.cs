@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using KitchenSink.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
+
 
 namespace KitchenSink.Controllers
 {
@@ -49,15 +49,26 @@ namespace KitchenSink.Controllers
 
                 var jsonList = jdoc.RootElement.GetProperty("results");
 
-                foreach (var item in jsonList.EnumerateArray())
+                var list = jsonList.GetArrayLength();
+
+                if (list == 0)
                 {
-                    var recipes = JsonSerializer.Deserialize<Recipes>(item.ToString());
-                    mikeRecipe.Add(recipes);
+                    return View("GetStarted");
                 }
+                else
+                {
 
-                Recipes chosenRecipe = mikeRecipe[random.Next(mikeRecipe.Count)];
+                    foreach (var item in jsonList.EnumerateArray())
+                    {
+                        var recipes = JsonSerializer.Deserialize<Recipes>(item.ToString());
 
-                return View(chosenRecipe);
+                        mikeRecipe.Add(recipes);
+                    }
+
+                    Recipes chosenRecipe = mikeRecipe[random.Next(mikeRecipe.Count)];
+
+                    return View(chosenRecipe);
+                }
             }
         }
         public IActionResult TestRandomRecipe()

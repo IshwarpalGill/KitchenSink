@@ -63,12 +63,4 @@ namespace KitchenSink.Models
         public string name { get; set; }
         public string image { get; set; }
     }
-
-
-
-    //public class RecipeArray
-    //{
-    //    [JsonPropertyName("title")]
-    //    public Recipes[] TitleOfRecipe { get; set; }
-    //}
 }
