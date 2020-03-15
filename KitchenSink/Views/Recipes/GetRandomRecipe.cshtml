@@ -13,14 +13,24 @@
         <th style="text-align:left" class="align-middle"><h2>Category</h2></th>
     </tr>
 
-    <!--We us a foreach loop to iterate through the list and display the properties as needed-->
-    @*@foreach (Recipes recipes in Model)
-    {*@
-<tr>
-    <td><h4>@Model.Id</h4></td>
-    <td><h4>@Model.Title</h4></td>
-    <td><h4>@Model.FoodCategory</h4></td>
-    <td><image src=@Model.Image></td>
-</tr>
-    
+    <tr>
+        <td><h4>@Model.Title</h4></td>
+
+        @foreach (var step in Model.AnalyzedInstructions[0].steps)
+        {
+            <td>
+                <h4>
+                    @step.number
+                    @foreach (var ingred in step.ingredients)
+                    {
+                        @ingred.name<br />
+                    }<br>
+                    @step.step
+                </h4>
+            </td>
+        }
+        <td><image src=@Model.Image></td>
+    </tr>
+
 </table>
+
