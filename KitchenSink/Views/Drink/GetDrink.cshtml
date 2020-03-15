@@ -4,31 +4,68 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!--We use razor to help collect the list that has been passed to us from the Home Controller-->
-@model List<Drink>
+@model Drink
 <!--This small form is to take userinput and help display a new list of items based on the entry.
     It curretly is not functioning properly-->
 @*<form asp-controller="Drink" asp-action="GetDrink">
-	<div>
-		<label class="form-group">Enter Alcohol</label>
-		<input type="text" name="alcohol"><br><br>
-		<input type="submit" class="form-control btn btn-primary">
-	</div>
-</form>*@
+        <div>
+            <label class="form-group">Enter Alcohol</label>
+            <input type="text" name="alcohol"><br><br>
+            <input type="submit" class="form-control btn btn-primary">
+        </div>
+    </form>*@
 
 <!--This table is used to display the data from the list-->
-<table class=" table table-striped">
+@*<table class=" table table-striped">
     <tr>
         <th style="text-align:left" class="align-middle"><h2>Drink Id</h2></th>
-        <th style="text-align:left" class="align-middle"><h2>Drink Name</h2></th>
-        <th style="text-align:left" class="align-middle"><h2>Drink Category</h2></th>
-    </tr>
+        <th style="text-align:left" class="align-middle"><h2>Drink Name</h2></th>*@
+        @*<th style="text-align:left" class="align-middle"><h2>Drink Category</h2></th>*@
+    @*</tr>*@
     <!--We us a foreach loop to iterate through the list and display the properties as needed-->
-    @foreach (Drink drink in Model)
-    {
-        <tr>
-            <td>@drink.Id</td>
-            <td>@drink.Name</td>
-            @*<td>@drink.Category</td>*@
-        </tr>
-    }
+    @*@foreach (Drink drink in Model)
+            {
+                <tr>
+                    <td>@drink.Id</td>
+                    <td>@drink.Name</td>
+                    <td>@drink.Image</td>
+                </tr>
+            }
+        </table>*@
+
+<table class=" table table-striped">
+    <tr>
+        <th>Cocktail</th>
+        <th>Ingredients</th>
+        <th>Instructions</th>
+    </tr>
+    <tr>
+        <td>@Model.Name</td>
+        <td>
+            @Model.strMeasure1 @Model.strIngredient1<br />
+            @Model.strMeasure2 @Model.strIngredient2<br />
+            @Model.strMeasure3 @Model.strIngredient3<br />
+            @Model.strMeasure4 @Model.strIngredient4<br />
+            @Model.strMeasure5 @Model.strIngredient5<br />
+            @Model.strMeasure6 @Model.strIngredient6<br />
+            @Model.strMeasure7 @Model.strIngredient7<br />
+            @Model.strMeasure8 @Model.strIngredient8<br />
+            @Model.strMeasure9 @Model.strIngredient9<br />
+            @Model.strMeasure10 @Model.strIngredient10<br />
+            @Model.strMeasure11 @Model.strIngredient11<br />
+            @Model.strMeasure12 @Model.strIngredient12<br />
+            @Model.strMeasure13 @Model.strIngredient13<br />
+            @Model.strMeasure14 @Model.strIngredient14<br />
+            @Model.strMeasure15 @Model.strIngredient15<br />
+        </td>
+        <td>@Model.Instructions</td>
+    </tr>
+
 </table>
+
+
+<form asp-controller="Drink" asp-action="GetDrink" class=" table table-striped">
+    <label>shuffle</label>
+    <input type="submit" name="alcohol" />
+
+</form>

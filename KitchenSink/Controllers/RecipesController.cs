@@ -33,6 +33,11 @@ namespace KitchenSink.Controllers
             return View();
         }
 
+        //TODO: When we return the recipe, save the cuisine 
+
+        //TODO: pass this to home controller to eventually make call to DB 
+
+
         public async Task<IActionResult> GetRandomRecipe(string protein, string starch, string veggie, string spice, string aromatic)
         {
             var SpoonApiKey = _config["SpoonacularApiKey"];
