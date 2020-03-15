@@ -40,7 +40,7 @@ namespace KitchenSink.Controllers
             var key = _config["TheMovieDBApiKey"];
             using (var httpClient = new HttpClient())
             {
-                //using (var response = await httpClient.GetAsync($"https://api.themoviedb.org/3/genre/movie/list?api_key={key}&language=en-US"))
+                using (var response = await httpClient.GetAsync($"https://api.themoviedb.org/3/genre/movie/list?api_key={key}&language=en-US"))
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
                     genres = JsonSerializer.Deserialize<GenreArray>(stringResponse);

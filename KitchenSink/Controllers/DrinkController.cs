@@ -20,6 +20,7 @@ namespace KitchenSink.Controllers
         {
             return View();
         }
+//<<<<<<< Updated upstream
 
 
         //TODO: Change GetDrink to be dynamic using ingredients returned from user input (similar to recipe)
@@ -28,7 +29,10 @@ namespace KitchenSink.Controllers
 
         //TODO: pass this to home controller to eventually make call to DB 
 
-        public async Task<List<Drink>> GetDrink(string alcohol)
+        //public async Task<List<Drink>> GetDrink(string alcohol)
+//=======
+        public async Task<IActionResult> GetDrink(string alcohol)
+        //>>>>>>> Stashed changes
         {
             List<Drink> drinkList = new List<Drink>();
             //int num = random.Next(0, 25);
@@ -39,7 +43,6 @@ namespace KitchenSink.Controllers
 
                 //using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/search.php?f={let}"))
                 using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={alcohol}"))
-                //using (var response = await httpClient.GetAsync("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007"))
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
 
@@ -59,35 +62,60 @@ namespace KitchenSink.Controllers
 
                 }
 
-                //chosenDrink = drinkList[random.Next(0, drinkList.Count)];
+                //var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
                 //string drinkID = chosenDrink.Id;
-                //var drinkRecieved = RndDrink(drinkList);
+                //RndDrink(drinkList);
             }
-            return drinkList;
-        }
-        public IActionResult RndDrink(List<Drink> drinkList)
-        {
+            Drink drink = new Drink();
             var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
             string drinkID = chosenDrink.Id;
-            var DrinkRecieved = GetDrinkInfo(drinkID);
-            return View(DrinkRecieved);
-        }
 
-        public async Task<IActionResult> GetDrinkInfo(string drinkID)
-        {
-            Drink drink = new Drink();
-            //var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
-            //string drinkID = chosenDrink.Id;
-
-            using (var httpClient = new HttpClient())
+            using (var httpClient1 = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={drinkID}"))
+                using (var response2 = await httpClient1.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={drinkID}"))
                 {
-                    var stringResponse = await response.Content.ReadAsStringAsync();
-                    drink = JsonSerializer.Deserialize<Drink>(stringResponse);
+                    var stringResponse2 = await response2.Content.ReadAsStringAsync();
+                    JsonDocument jDoc2 = JsonDocument.Parse(stringResponse2);
+                    var jsonList2 = jDoc2.RootElement.GetProperty("drinks");
+
+                    foreach (var item in jsonList2.EnumerateArray())
+                    {
+                        drink = JsonSerializer.Deserialize<Drink>(item.ToString());
+
+                    }
+
+                    //drink = JsonSerializer.Deserialize<Drink>(stringResponse2);
                 }
             }
             return View(drink);
         }
+
+
+
+
+        //public string RndDrink(List<Drink> drinkList)
+        //{
+        //    var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
+        //    string drinkID = chosenDrink.Id;
+        //    GetDrinkInfo(drinkID);
+        //    return drinkID;
+        //}
+
+        //public async Task<IActionResult> GetDrinkInfo(string drinkID)
+        //{
+        //    Drink drink = new Drink();
+        //    //var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
+        //    //string drinkID = chosenDrink.Id;
+
+        //    using (var httpClient = new HttpClient())
+        //    {
+        //        using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={drinkID}"))
+        //        {
+        //            var stringResponse = await response.Content.ReadAsStringAsync();
+        //            drink = JsonSerializer.Deserialize<Drink>(stringResponse);
+        //        }
+        //    }
+        //    return View(drink);
+        //}
     }
 }

@@ -9,7 +9,7 @@ namespace KitchenSink.Models
 {
     public class Drink
     {
-        public Drink() { }
+        //public Drink() { }
         public Drink(string idDrink, string strDrink, string strCategory)
         {
             Id = idDrink;
@@ -17,6 +17,7 @@ namespace KitchenSink.Models
             Category = strCategory;
 
         }
+        public Drink() { }
         [JsonPropertyName("idDrink")]
         public string Id { get; set; }
         [JsonPropertyName("strDrink")]
@@ -34,33 +35,34 @@ namespace KitchenSink.Models
         public string strIngredient2 { get; set; }
         public string strIngredient3 { get; set; }
         public string strIngredient4 { get; set; }
-        public object strIngredient5 { get; set; }
-        public object strIngredient6 { get; set; }
-        public object strIngredient7 { get; set; }
-        public object strIngredient8 { get; set; }
-        public object strIngredient9 { get; set; }
-        public object strIngredient10 { get; set; }
-        public object strIngredient11 { get; set; }
-        public object strIngredient12 { get; set; }
-        public object strIngredient13 { get; set; }
-        public object strIngredient14 { get; set; }
-        public object strIngredient15 { get; set; }
+        public string strIngredient5 { get; set; }
+        public string strIngredient6 { get; set; }
+        public string strIngredient7 { get; set; }
+        public string strIngredient8 { get; set; }
+        public string strIngredient9 { get; set; }
+        public string strIngredient10 { get; set; }
+        public string strIngredient11 { get; set; }
+        public string strIngredient12 { get; set; }
+        public string strIngredient13 { get; set; }
+        public string strIngredient14 { get; set; }
+        public string strIngredient15 { get; set; }
         //measures
         public string strMeasure1 { get; set; }
         public string strMeasure2 { get; set; }
         public string strMeasure3 { get; set; }
         public string strMeasure4 { get; set; }
-        public object strMeasure5 { get; set; }
-        public object strMeasure6 { get; set; }
-        public object strMeasure7 { get; set; }
-        public object strMeasure8 { get; set; }
-        public object strMeasure9 { get; set; }
-        public object strMeasure10 { get; set; }
-        public object strMeasure11 { get; set; }
-        public object strMeasure12 { get; set; }
-        public object strMeasure13 { get; set; }
-        public object strMeasure14 { get; set; }
-        public object strMeasure15 { get; set; }
+        public string strMeasure5 { get; set; }
+        public string strMeasure6 { get; set; }
+        public string strMeasure7 { get; set; }
+        public string strMeasure8 { get; set; }
+        public string strMeasure9 { get; set; }
+        public string strMeasure10 { get; set; }
+        public string strMeasure11 { get; set; }
+        public string strMeasure12 { get; set; }
+        public string strMeasure13 { get; set; }
+        public string strMeasure14 { get; set; }
+        public string strMeasure15 { get; set; }
+
     }
 
     public class DrinkArray
