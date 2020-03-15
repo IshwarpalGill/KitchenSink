@@ -20,7 +20,7 @@
     <tr>
         <th style="text-align:left" class="align-middle"><h2>Drink Id</h2></th>
         <th style="text-align:left" class="align-middle"><h2>Drink Name</h2></th>
-        <th style="text-align:left" class="align-middle"><h2>Drink Category</h2></th>
+        @*<th style="text-align:left" class="align-middle"><h2>Drink Category</h2></th>*@
     </tr>
     <!--We us a foreach loop to iterate through the list and display the properties as needed-->
     @foreach (Drink drink in Model)
@@ -28,7 +28,7 @@
         <tr>
             <td>@drink.Id</td>
             <td>@drink.Name</td>
-            @*<td>@drink.Category</td>*@
+            <td>@drink.Image</td>
         </tr>
     }
 </table>

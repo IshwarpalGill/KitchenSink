@@ -23,7 +23,7 @@ namespace KitchenSink.Controllers
         public async Task<IActionResult> GetDrink(string alcohol)
         {
             List<Drink> drinkList = new List<Drink>();
-            int num = random.Next(0, 25);
+            //int num = random.Next(0, 25);
             //char let = (char)('a' + num);
 
             using (var httpClient = new HttpClient())
@@ -43,15 +43,43 @@ namespace KitchenSink.Controllers
                         drinkList.Add(new Drink()
                         {
                             Id = jsonList[i].GetProperty("idDrink").GetString(),
-                            Name = jsonList[i].GetProperty("strDrink").GetString()
-                            //drinkList[i].GetProperty("stringredient" + (i + 1)).GetString();
-                            //drinkList[i].GetProperty("strmeasurement" + (i + 1)).GetString();
+                            Name = jsonList[i].GetProperty("strDrink").GetString(),
+                            Image = jsonList[i].GetProperty("strDrinkThumb").GetString()
                         });
+
                     }
 
                 }
+
+                chosenDrink = drinkList[random.Next(0, drinkList.Count)];
+                //string drinkID = chosenDrink.Id;
+                //var drinkRecieved = RndDrink(drinkList);
             }
-            return View(drinkList);
+            return View();
+        }
+        public IActionResult RndDrink(List<Drink> drinkList)
+        {
+            var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
+            string drinkID = chosenDrink.Id;
+            var DrinkRecieved = GetDrinkInfo(drinkID);
+            return View(DrinkRecieved);
+        }
+
+        public async Task<IActionResult> GetDrinkInfo(string drinkID)
+        {
+            Drink drink = new Drink();
+            //var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
+            //string drinkID = chosenDrink.Id;
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={drinkID}"))
+                {
+                    var stringResponse = await response.Content.ReadAsStringAsync();
+                    drink = JsonSerializer.Deserialize<Drink>(stringResponse);
+                }
+            }
+            return View(drink);
         }
     }
 }
