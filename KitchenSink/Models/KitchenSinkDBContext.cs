@@ -22,6 +22,11 @@ namespace KitchenSink.Models
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Cuisine> Cuisine { get; set; }
+        public virtual DbSet<Drinks> Drinks { get; set; }
+        public virtual DbSet<Genres> Genres { get; set; }
+        public virtual DbSet<Recommendation> Recommendation { get; set; }
+        public virtual DbSet<UserPreferences> UserPreferences { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -130,6 +135,64 @@ namespace KitchenSink.Models
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<Cuisine>(entity =>
+            {
+                entity.Property(e => e.Cuisine1)
+                    .IsRequired()
+                    .HasColumnName("Cuisine")
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Drinks>(entity =>
+            {
+                entity.Property(e => e.Category)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.NonAlcoholic).HasColumnName("Non-Alcoholic");
+            });
+
+            modelBuilder.Entity<Genres>(entity =>
+            {
+                entity.Property(e => e.DbgenreId).HasColumnName("DBGenreId");
+
+                entity.Property(e => e.Genre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Recommendation>(entity =>
+            {
+                entity.HasOne(d => d.Genre)
+                    .WithMany(p => p.Recommendation)
+                    .HasForeignKey(d => d.GenreId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Recommendation_Movie");
+
+                entity.HasOne(d => d.Recipe)
+                    .WithMany(p => p.Recommendation)
+                    .HasForeignKey(d => d.RecipeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Recommendation_Cuisine");
+            });
+
+            modelBuilder.Entity<UserPreferences>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.ExcludedCuisine).HasMaxLength(50);
+
+                entity.Property(e => e.ExcludedDrink).HasMaxLength(50);
+
+                entity.Property(e => e.ExcludedGenre).HasMaxLength(50);
+
+                entity.Property(e => e.SavedMovie)
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
+                entity.Property(e => e.SavedRecipe).HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);

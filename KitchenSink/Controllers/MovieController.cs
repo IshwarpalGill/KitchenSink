@@ -26,6 +26,14 @@ namespace KitchenSink.Controllers
             return View();
         }
 
+        //TODO: Create method that takes in genreID returned from DB & calls API to return movie 
+        // 1) Call DB 
+        // 2) Return MovieDBId genre from DB 
+        // 3) Use this ID to make call to Movie DB, return movie 
+        // 4) Pass that to model to the view 
+
+
+        //TODO: Create method to return a random movie
         public async Task<IActionResult> GetGenre()
         {
             List<Genre> genreList = new List<Genre>();

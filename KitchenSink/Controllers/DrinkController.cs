@@ -20,6 +20,14 @@ namespace KitchenSink.Controllers
         {
             return View();
         }
+
+        //TODO: Change GetDrink to be dynamic using ingredients returned from user input (similar to recipe)
+
+        //TODO: When we return the drink, save the category 
+
+        //TODO: pass this to home controller to eventually make call to DB 
+
+
         public async Task<IActionResult> GetDrink(string alcohol)
         {
             List<Drink> drinkList = new List<Drink>();
@@ -51,7 +59,7 @@ namespace KitchenSink.Controllers
 
                 }
 
-                chosenDrink = drinkList[random.Next(0, drinkList.Count)];
+                var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
                 //string drinkID = chosenDrink.Id;
                 //var drinkRecieved = RndDrink(drinkList);
             }
