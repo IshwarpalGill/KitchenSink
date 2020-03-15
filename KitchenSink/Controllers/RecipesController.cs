@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using KitchenSink.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 
 namespace KitchenSink.Controllers
 {
@@ -19,7 +20,6 @@ namespace KitchenSink.Controllers
         private IConfiguration _config;
 
         // 3/8/2020 edits using JsonPropertyName
-        RecipeArray recipes = new RecipeArray();
         List<Recipes> mikeRecipe = new List<Recipes>();
         Random random = new Random();
 
@@ -30,7 +30,7 @@ namespace KitchenSink.Controllers
         //public async Task<IActionResult> GetRandomRecipe(string protein, string starch, string veggie, string spice, string aromatic)
         public IActionResult GetStarted()
         {
-            return View("GetRandomRecipe");
+            return View();
         }
 
         public async Task<IActionResult> GetRandomRecipe(string protein, string starch, string veggie, string spice, string aromatic)
@@ -42,33 +42,20 @@ namespace KitchenSink.Controllers
                 //this using block is the action to get the call.  We have added our key to the end of the request URL per API documentation requirement.
                 //this specific url generates 1 random recipe everytime we call it.
                 using var response = await httpClient.GetAsync
-                    ($"https://api.spoonacular.com/recipes/findByIngredients?ingredients={protein},+{starch},+{veggie},+{spice},+{aromatic}&number=5&apiKey={SpoonApiKey}");
+                    ($"https://api.spoonacular.com/recipes/complexSearch?includeIngredients={protein},{starch},{veggie},{spice},{aromatic}&instructionsRequired=true&addRecipeInformation=true&apiKey={SpoonApiKey}");
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
                 JsonDocument jdoc = JsonDocument.Parse(stringResponse);
-        
 
-                foreach (var item in jdoc.RootElement.EnumerateArray())
+                var jsonList = jdoc.RootElement.GetProperty("results");
+
+                foreach (var item in jsonList.EnumerateArray())
                 {
                     var recipes = JsonSerializer.Deserialize<Recipes>(item.ToString());
                     mikeRecipe.Add(recipes);
                 }
 
-                Recipes chosenRecipe;
-                chosenRecipe = mikeRecipe[random.Next(mikeRecipe.Count)];
-
-                int recipeId = chosenRecipe.Id;
-                using var response2 = await httpClient.GetAsync
-                    ($"https://api.spoonacular.com/recipes/{recipeId}/information&apiKey={SpoonApiKey}");
-                var stringResponse2 = await response.Content.ReadAsStringAsync();
-
-                JsonDocument jdoc2 = JsonDocument.Parse(stringResponse);
-
-                foreach (var item in jdoc2.RootElement.EnumerateArray())
-                {
-                    var recipes = JsonSerializer.Deserialize<Recipes>(item.ToString());
-                    mikeRecipe.Add(recipes);
-                }
+                Recipes chosenRecipe = mikeRecipe[random.Next(mikeRecipe.Count)];
 
                 return View(chosenRecipe);
             }
