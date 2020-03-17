@@ -26,6 +26,7 @@ namespace KitchenSink.Controllers
         //TODO: Change GetDrink to be dynamic using ingredients returned from user input (similar to recipe)
 
         //TODO: When we return the drink, save the category 
+        // for the drink, Ish made it so the category is part of the Drink Model. 
 
         //TODO: pass this to home controller to eventually make call to DB 
 
@@ -35,13 +36,12 @@ namespace KitchenSink.Controllers
         //>>>>>>> Stashed changes
         {
             List<Drink> drinkList = new List<Drink>();
-            //int num = random.Next(0, 25);
-            //char let = (char)('a' + num);
+           
 
             using (var httpClient = new HttpClient())
             {
 
-                //using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/search.php?f={let}"))
+                
                 using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={alcohol}"))
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
@@ -90,7 +90,11 @@ namespace KitchenSink.Controllers
             return View(drink);
         }
 
-
+        //public IActionResult shuffle(string alcohol)
+        //{
+        //    var drink = GetDrink(alcohol);
+        //    return View("GetDrink", drink);
+        //}
 
 
         //public string RndDrink(List<Drink> drinkList)
@@ -119,3 +123,6 @@ namespace KitchenSink.Controllers
         //}
     }
 }
+//int num = random.Next(0, 25);
+//char let = (char)('a' + num);
+//using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/search.php?f={let}")) api call for random drink

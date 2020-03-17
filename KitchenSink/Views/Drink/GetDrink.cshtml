@@ -40,7 +40,8 @@
         <th>Instructions</th>
     </tr>
     <tr>
-        <td>@Model.Name</td>
+        
+        <td>@Model.Name <br /><img src=@Model.Image /preview width="200" height="200"/></td>
         <td>
             @Model.strMeasure1 @Model.strIngredient1<br />
             @Model.strMeasure2 @Model.strIngredient2<br />
@@ -58,14 +59,13 @@
             @Model.strMeasure14 @Model.strIngredient14<br />
             @Model.strMeasure15 @Model.strIngredient15<br />
         </td>
-        <td>@Model.Instructions</td>
+        <td width="500">@Model.Instructions</td>
     </tr>
 
 </table>
 
 
-<form asp-controller="Drink" asp-action="GetDrink" class=" table table-striped">
+<form asp-controller="Drink" asp-action="shuffle" class=" table table-striped">
     <label>shuffle</label>
     <input type="submit" name="alcohol" />
-
 </form>
