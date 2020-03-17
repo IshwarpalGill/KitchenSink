@@ -20,7 +20,6 @@ namespace KitchenSink.Controllers
         {
             return View();
         }
-//<<<<<<< Updated upstream
 
 
         //TODO: Change GetDrink to be dynamic using ingredients returned from user input (similar to recipe)
@@ -29,24 +28,16 @@ namespace KitchenSink.Controllers
 
         //TODO: pass this to home controller to eventually make call to DB 
 
-        //public async Task<List<Drink>> GetDrink(string alcohol)
-//=======
         public async Task<IActionResult> GetDrink(string alcohol)
-        //>>>>>>> Stashed changes
         {
             List<Drink> drinkList = new List<Drink>();
-            //int num = random.Next(0, 25);
-            //char let = (char)('a' + num);
 
             using (var httpClient = new HttpClient())
             {
-
-                //using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/search.php?f={let}"))
                 using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={alcohol}"))
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
 
-                    //drinks = JsonSerializer.Deserialize<DrinkArray>(stringResponse);
                     jDoc = JsonDocument.Parse(stringResponse);
                     var jsonList = jDoc.RootElement.GetProperty("drinks");
                     for (int i = 0; i < jsonList.GetArrayLength(); i++)
@@ -55,20 +46,16 @@ namespace KitchenSink.Controllers
                         {
                             Id = jsonList[i].GetProperty("idDrink").GetString(),
                             Name = jsonList[i].GetProperty("strDrink").GetString(),
-                            Image = jsonList[i].GetProperty("strDrinkThumb").GetString()
+                            Image = jsonList[i].GetProperty("strDrinkThumb").GetString(),
+                            Category = jsonList[i].GetProperty("strCategory").GetString(),
                         });
-
                     }
-
                 }
-
-                //var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
-                //string drinkID = chosenDrink.Id;
-                //RndDrink(drinkList);
             }
             Drink drink = new Drink();
             var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
             string drinkID = chosenDrink.Id;
+            string drinkCategory = chosenDrink.Category;
 
             using (var httpClient1 = new HttpClient())
             {
@@ -83,14 +70,12 @@ namespace KitchenSink.Controllers
                         drink = JsonSerializer.Deserialize<Drink>(item.ToString());
 
                     }
-
-                    //drink = JsonSerializer.Deserialize<Drink>(stringResponse2);
                 }
             }
             return View(drink);
         }
 
-
+        
 
 
         //public string RndDrink(List<Drink> drinkList)

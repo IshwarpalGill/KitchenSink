@@ -165,11 +165,17 @@ namespace KitchenSink.Models
 
             modelBuilder.Entity<Recommendation>(entity =>
             {
+                entity.HasOne(d => d.Drink)
+                    .WithMany(p => p.Recommendation)
+                    .HasForeignKey(d => d.DrinkId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Recommendation_Drink");
+
                 entity.HasOne(d => d.Genre)
                     .WithMany(p => p.Recommendation)
                     .HasForeignKey(d => d.GenreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Recommendation_Movie");
+                    .HasConstraintName("FK_Recommendation_Genre");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.Recommendation)
