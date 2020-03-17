@@ -72,7 +72,16 @@ namespace KitchenSink.Controllers
 
                     Recipes chosenRecipe = mikeRecipe[random.Next(mikeRecipe.Count)];
 
-                    return View(chosenRecipe);
+                    var chosenId = chosenRecipe.Id;
+
+                    using var response2 = await httpClient.GetAsync
+                    ($"https://api.spoonacular.com/recipes/{chosenId}/information?includeNutrition=false&apiKey={SpoonApiKey}");
+
+                    var stringResponse2 = await response2.Content.ReadAsStringAsync();
+
+                    var recipes2 = JsonSerializer.Deserialize<Recipes>(stringResponse2.ToString());
+
+                    return View(recipes2);
                 }
             }
         }

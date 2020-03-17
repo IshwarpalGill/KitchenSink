@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "GetRandomMovie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Movie
+<!--This table is used to display the data from the list-->
+<table class=" table table-striped">
+    <tr></tr>
+    <tr>
+        <th style="text-align:left" class="align-middle"><h2>Title</h2></th>
+        <th style="text-align:left" class="align-middle"><h2>Poster</h2></th>
+        <th style="text-align:left" class="align-middle"><h2>Overview</h2></th>
+    </tr>
+    <tr>
+        <td>@Model.original_title</td>
+        <td><img src="http://image.tmdb.org/t/p/w300/@Model.poster_path" /></td>
+        <td>@Model.overview</td>
+    </tr>
+
+</table>

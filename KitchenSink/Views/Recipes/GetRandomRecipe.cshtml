@@ -7,31 +7,35 @@
 @model Recipes
 <!--This table is used to display the data from the list-->
 <table class=" table table-striped">
+    <tr>@Model.Title</tr>
     <tr>
-        <th style="text-align:left" class="align-middle"><h2>Recipe Id</h2></th>
+        <th style="text-align:left" class="align-middle"><h2>Recipe Ingredients</h2></th>
         <th style="text-align:left" class="align-middle"><h2>Recipe Name</h2></th>
         <th style="text-align:left" class="align-middle"><h2>Category</h2></th>
     </tr>
 
     <tr>
-        <td><h4>@Model.Title</h4></td>
-
+        @foreach(var options in Model.extendedIngredients)
+        {
+            <td> @options.original</td>
+        }
         @foreach (var step in Model.AnalyzedInstructions[0].steps)
         {
             <td>
-                <h4>
-
-                    @step.number
-                    @foreach (var ingred in step.ingredients)
-                    {
-                        @ingred.name<br />
-                    }<br>
-                    @step.step
-                </h4>
+                @step.number<br>
+                @foreach (var ingred in step.ingredients)
+                {
+                    @ingred.name<br />
+                }<br>
+                @step.step<br>
             </td>
         }
         <td><image src=@Model.Image></td>
     </tr>
 
-</table>
+    <tr>
 
+    </tr>
+
+</table>
+<button onclick="location.href='@Url.Action("Drink", "Drink")'">Drink</button>

@@ -16,6 +16,8 @@ namespace KitchenSink.Controllers
         private JsonDocument jDoc;
 
         GenreArray genres = new GenreArray();
+        List<Movie> movieList = new List<Movie>();
+        Random random = new Random();
 
         public MovieController(IConfiguration config)
         {
@@ -44,19 +46,45 @@ namespace KitchenSink.Controllers
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
                     genres = JsonSerializer.Deserialize<GenreArray>(stringResponse);
-                    //jDoc = JsonDocument.Parse(stringResponse);
-                    //var jsonList = jDoc.RootElement.GetProperty("genres");
-                    //for (int i = 0; i < jsonList.GetArrayLength(); i++)
-                    //{
-                    //    genreList.Add(new Genre()
-                    //    {
-                    //        Id = jsonList[i].GetProperty("id").GetInt32(),
-                    //        Name = jsonList[i].GetProperty("name").GetString()
-                    //    });
-                    //}
                 }
             }
             return View(genres);
+        }
+
+        public async Task<IActionResult> GetRandomMovie(int genre)
+        {
+            var MovieApiKey = _config["TheMovieDBApiKey"];
+            using (var httpClient = new HttpClient())
+            {
+                using var response = await httpClient.GetAsync
+                    ($"https://api.themoviedb.org/3/discover/movie?with_genres=18&sort_by=vote_average.desc&vote_count.gte=10&api_key={MovieApiKey}");
+                var stringResponse = await response.Content.ReadAsStringAsync();
+
+                JsonDocument jdoc = JsonDocument.Parse(stringResponse);
+
+                var jsonList = jdoc.RootElement.GetProperty("results");
+
+                var list = jsonList.GetArrayLength();
+
+                if (list == 0)
+                {
+                    return View("GetStarted");
+                }
+                else
+                {
+
+                    foreach (var item in jsonList.EnumerateArray())
+                    {
+                        var movie = JsonSerializer.Deserialize<Movie>(item.ToString());
+
+                        movieList.Add(movie);
+                    }
+
+                    Movie chosenMovie = movieList[random.Next(movieList.Count)];
+
+                    return View(chosenMovie);
+                }
+            }
         }
     }
 }
