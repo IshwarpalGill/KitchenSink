@@ -32,16 +32,14 @@ namespace KitchenSink.Controllers
 
         //public async Task<List<Drink>> GetDrink(string alcohol)
 //=======
-        public async Task<IActionResult> GetDrink(string alcohol)
         //>>>>>>> Stashed changes
+        public async Task<IActionResult> GetDrink(string alcohol)
         {
             List<Drink> drinkList = new List<Drink>();
            
-
             using (var httpClient = new HttpClient())
             {
 
-                
                 using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={alcohol}"))
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
@@ -57,9 +55,7 @@ namespace KitchenSink.Controllers
                             Name = jsonList[i].GetProperty("strDrink").GetString(),
                             Image = jsonList[i].GetProperty("strDrinkThumb").GetString()
                         });
-
                     }
-
                 }
 
                 //var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
@@ -89,7 +85,6 @@ namespace KitchenSink.Controllers
             }
             return View(drink);
         }
-
         public async Task<IActionResult> RndNonAlc()
         {
             List<Drink> drinkList = new List<Drink>();
