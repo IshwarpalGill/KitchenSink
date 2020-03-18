@@ -40,7 +40,8 @@
         <th>Instructions</th>
     </tr>
     <tr>
-        <td>@Model.Name</td>
+        @* display the model (drink model in this case) information *@
+        <td>@Model.Name <br /><img src=@Model.Image /preview width="200" height="200"/></td>
         <td>
             @Model.strMeasure1 @Model.strIngredient1<br />
             @Model.strMeasure2 @Model.strIngredient2<br />
@@ -49,7 +50,7 @@
             @Model.strMeasure5 @Model.strIngredient5<br />
             @Model.strMeasure6 @Model.strIngredient6<br />
             @Model.strMeasure7 @Model.strIngredient7<br />
-            @Model.strMeasure8 @Model.strIngredient8<br />
+            @Model.strMeasure8 @Model.strIngredient8<br /> 
             @Model.strMeasure9 @Model.strIngredient9<br />
             @Model.strMeasure10 @Model.strIngredient10<br />
             @Model.strMeasure11 @Model.strIngredient11<br />
@@ -58,14 +59,17 @@
             @Model.strMeasure14 @Model.strIngredient14<br />
             @Model.strMeasure15 @Model.strIngredient15<br />
         </td>
-        <td>@Model.Instructions</td>
+        <td width="500">@Model.Instructions</td>
     </tr>
 
 </table>
 
-
-<form asp-controller="Drink" asp-action="GetDrink" class=" table table-striped">
-    <label>shuffle</label>
-    <input type="submit" name="alcohol" />
-
+@* button to reload page and get new recipe *@
+<form >
+    <button onClick="window.location.reload();">New Drink</button>
 </form>
+
+@* button to save Drink into the database and to send to Movie view? *@
+@*<form  asp-controller="Home" asp-action="" class="float-right">
+    <button type="button" onclick="location.href='@Url.Action("Save","Home", @Model)'"></button>
+</form>*@

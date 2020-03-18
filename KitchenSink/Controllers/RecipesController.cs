@@ -14,20 +14,16 @@ namespace KitchenSink.Controllers
 {
     public class RecipesController : Controller
     {
-        //Recipes recipes = new Recipes();
-        //List<Recipes> recipeList = new List<Recipes>();
-        //private JsonDocument jDoc;
         private IConfiguration _config;
 
-        // 3/8/2020 edits using JsonPropertyName
         List<Recipes> mikeRecipe = new List<Recipes>();
         Random random = new Random();
+        KitchenSinkDBContext db = new KitchenSinkDBContext();
 
         public RecipesController(IConfiguration config)
         {
             _config = config;
         }
-        //public async Task<IActionResult> GetRandomRecipe(string protein, string starch, string veggie, string spice, string aromatic)
         public IActionResult GetStarted()
         {
             return View();
@@ -41,13 +37,10 @@ namespace KitchenSink.Controllers
         public async Task<IActionResult> GetRandomRecipe(string protein, string starch, string veggie, string spice, string aromatic)
         {
             var SpoonApiKey = _config["SpoonacularApiKey"];
-            //this using block sets the stage to open the API call
             using (var httpClient = new HttpClient())
             {
-                //this using block is the action to get the call.  We have added our key to the end of the request URL per API documentation requirement.
-                //this specific url generates 1 random recipe everytime we call it.
                 using var response = await httpClient.GetAsync
-                    ($"https://api.spoonacular.com/recipes/complexSearch?includeIngredients={protein},{starch},{veggie},{spice},{aromatic}&instructionsRequired=true&addRecipeInformation=true&apiKey={SpoonApiKey}");
+                    ($"https://api.spoonacular.com/recipes/complexSearch?includeIngredients={protein},+{starch},+{veggie},+{spice},+{aromatic}&instructionsRequired=true&addRecipeInformation=true&apiKey={SpoonApiKey}");
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
                 JsonDocument jdoc = JsonDocument.Parse(stringResponse);
@@ -62,7 +55,6 @@ namespace KitchenSink.Controllers
                 }
                 else
                 {
-
                     foreach (var item in jsonList.EnumerateArray())
                     {
                         var recipes = JsonSerializer.Deserialize<Recipes>(item.ToString());
@@ -72,7 +64,34 @@ namespace KitchenSink.Controllers
 
                     Recipes chosenRecipe = mikeRecipe[random.Next(mikeRecipe.Count)];
 
-                    return View(chosenRecipe);
+                    var chosenId = chosenRecipe.Id;
+
+                    using var response2 = await httpClient.GetAsync
+                    ($"https://api.spoonacular.com/recipes/{chosenId}/information?includeNutrition=false&apiKey={SpoonApiKey}");
+
+                    var stringResponse2 = await response2.Content.ReadAsStringAsync();
+
+                    var recipes2 = JsonSerializer.Deserialize<Recipes>(stringResponse2.ToString());
+
+
+                    //-------This will allow us to pass the matching cuisine from the Recipe Object anywhere we need
+
+                    //foreach (Cuisine cus in db.Cuisine)
+                    //{
+                    //    if (recipes2.cuisines.Contains(cus.Cuisine1))
+                    //    {
+
+                    //    }
+                    //    else
+                    //    {
+
+                    //    }
+                    //}
+
+                    //------------------
+                    
+                    
+                    return View(recipes2);
                 }
             }
         }
@@ -82,3 +101,4 @@ namespace KitchenSink.Controllers
         }
     }
 }
+//https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/e35/89933484_809956926153730_7599352728966565164_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_cat=1&_nc_ohc=aTc5bO4JmBkAX-RzIKl&oh=0606143c88e455adaad33604637e3fb0&oe=5E75137D
