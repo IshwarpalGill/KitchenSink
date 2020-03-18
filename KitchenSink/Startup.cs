@@ -36,6 +36,7 @@ namespace KitchenSink
             services.Configure<IdentityOptions>(options => options.SignIn.RequireConfirmedEmail = true);
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +55,7 @@ namespace KitchenSink
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();

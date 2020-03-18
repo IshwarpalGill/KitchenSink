@@ -12,13 +12,19 @@ namespace KitchenSink.Models
 
         [JsonPropertyName("id")]
         public int Id { get; set; }
+        
         [JsonPropertyName("title")]
         public string Title { get; set; }
-        
+
         [JsonPropertyName("name")]
         public string IngredientName { get; set; }
+        
         [JsonPropertyName("image")]
         public string Image { get; set; }
+        
+        [JsonPropertyName("cuisines")]
+        public string[] cuisines { get; set; }
+        
         [JsonPropertyName("analyzedInstructions")]
         public Analyzedinstruction[] AnalyzedInstructions { get; set; }
         public MissedIngredients[] missedIngredients { get; set; }
