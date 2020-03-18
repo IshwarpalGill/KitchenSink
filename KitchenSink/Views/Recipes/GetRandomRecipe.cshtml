@@ -15,7 +15,7 @@
     </tr>
 
     <tr>
-        @foreach(var options in Model.extendedIngredients)
+        @foreach (var options in Model.extendedIngredients)
         {
             <td> @options.original</td>
         }
@@ -34,8 +34,13 @@
     </tr>
 
     <tr>
-
     </tr>
 
 </table>
-<button onclick="location.href='@Url.Action("Drink", "Drink")'">Drink</button>
+<section>
+    <button onclick="location.href='@Url.Action("Drink", "Drink")'" class="form-control btn-primary col-12 col-6">Drink</button>
+</section>
+<br />
+<section>
+    <button onclick="location.href='@Url.Action("SaveRecipeResults", "SaveResults")'" class="form-control btn-success col-12 col-6">Save</button>
+</section>
