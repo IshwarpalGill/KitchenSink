@@ -12,7 +12,7 @@ namespace KitchenSink.Models
 
         public int Id { get; set; }
         public string Genre { get; set; }
-        public int? DbgenreId { get; set; }
+        public int DbgenreId { get; set; }
 
         public virtual ICollection<Recommendation> Recommendation { get; set; }
     }

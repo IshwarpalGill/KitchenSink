@@ -13,7 +13,7 @@ namespace KitchenSink.Controllers
     public class MovieController : Controller
     {
         private IConfiguration _config;
-        private JsonDocument jDoc;
+        //private JsonDocument jDoc;
 
         GenreArray genres = new GenreArray();
         List<Movie> movieList = new List<Movie>();
