@@ -37,6 +37,18 @@ namespace KitchenSink.Controllers
 
             return View();
         }
+        //// SAVE DRINK
+        [Authorize]
+        public IActionResult SaveDrinkResults()
+        {
+            db.Add(new UserPreferences()
+            {
+                SavedDrink = preferences.SavedDrink
+            });
+            db.SaveChanges();
+
+            return View();
+        }
 
         // EXCLUDE DRINK
         [Authorize]
