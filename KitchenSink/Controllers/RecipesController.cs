@@ -24,7 +24,7 @@ namespace KitchenSink.Controllers
         {
             _config = config;
         }
-        
+
         public IActionResult GetStarted()
         {
             return View();
@@ -75,27 +75,23 @@ namespace KitchenSink.Controllers
 
                     //-----This will allow us to pass the matching cuisine from the Recipe Object anywhere we need
 
-                    //foreach (Cuisine cus in db.Cuisine)
-                    //{
-                    //    if (recipes2.cuisines.Contains(cus.Cuisine1))
-                    //    {
+                    foreach (Cuisine cus in db.Cuisine)
+                    {
+                        if (recipes2.cuisines.Contains(cus.Cuisine1))
+                        {
 
-                    //    }
-                    //    else
-                    //    {
+                        }
+                        else
+                        {
 
-                    //    }
-                    //}
+                        }
+                    }
 
                     //-----
-                    
+
                     return View(recipes2);
                 }
             }
-        }
-        public IActionResult TestRandomRecipe()
-        {
-            return View();
         }
     }
 }
