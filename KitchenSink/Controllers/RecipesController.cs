@@ -24,6 +24,7 @@ namespace KitchenSink.Controllers
         {
             _config = config;
         }
+        
         public IActionResult GetStarted()
         {
             return View();
@@ -32,7 +33,6 @@ namespace KitchenSink.Controllers
         //TODO: When we return the recipe, save the cuisine
 
         //TODO: pass this to home controller to eventually make call to DB
-
 
         public async Task<IActionResult> GetRandomRecipe(string protein, string starch, string veggie, string spice, string aromatic)
         {
@@ -73,8 +73,7 @@ namespace KitchenSink.Controllers
 
                     var recipes2 = JsonSerializer.Deserialize<Recipes>(stringResponse2.ToString());
 
-
-                    //-------This will allow us to pass the matching cuisine from the Recipe Object anywhere we need
+                    //-----This will allow us to pass the matching cuisine from the Recipe Object anywhere we need
 
                     //foreach (Cuisine cus in db.Cuisine)
                     //{
@@ -88,8 +87,7 @@ namespace KitchenSink.Controllers
                     //    }
                     //}
 
-                    //------------------
-                    
+                    //-----
                     
                     return View(recipes2);
                 }
@@ -101,4 +99,3 @@ namespace KitchenSink.Controllers
         }
     }
 }
-//https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/e35/89933484_809956926153730_7599352728966565164_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_cat=1&_nc_ohc=aTc5bO4JmBkAX-RzIKl&oh=0606143c88e455adaad33604637e3fb0&oe=5E75137D

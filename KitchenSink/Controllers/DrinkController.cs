@@ -20,7 +20,7 @@ namespace KitchenSink.Controllers
         {
             return View();
         }
-//<<<<<<< Updated upstream
+        //<<<<<<< Updated upstream
 
 
         //TODO: Change GetDrink to be dynamic using ingredients returned from user input (similar to recipe)
@@ -31,17 +31,14 @@ namespace KitchenSink.Controllers
         //TODO: pass this to home controller to eventually make call to DB 
 
         //public async Task<List<Drink>> GetDrink(string alcohol)
-//=======
+    
         public async Task<IActionResult> GetDrink(string alcohol)
-        //>>>>>>> Stashed changes
         {
             List<Drink> drinkList = new List<Drink>();
            
-
             using (var httpClient = new HttpClient())
             {
 
-                
                 using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={alcohol}"))
                 {
                     var stringResponse = await response.Content.ReadAsStringAsync();
@@ -57,9 +54,7 @@ namespace KitchenSink.Controllers
                             Name = jsonList[i].GetProperty("strDrink").GetString(),
                             Image = jsonList[i].GetProperty("strDrinkThumb").GetString()
                         });
-
                     }
-
                 }
 
                 //var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
@@ -89,7 +84,6 @@ namespace KitchenSink.Controllers
             }
             return View(drink);
         }
-
         public async Task<IActionResult> RndNonAlc()
         {
             List<Drink> drinkList = new List<Drink>();
@@ -263,3 +257,13 @@ namespace KitchenSink.Controllers
 //int num = random.Next(0, 25);
 //char let = (char)('a' + num);
 //using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/search.php?f={let}")) api call for random drink
+
+
+//need to write a null exception for submit so that it will say no drink selected
+//following code for overloading did not work
+//public async Task<IActionResult> GetDrink()
+//{
+//    Drink drink = new Drink();
+//    drink.Name = "No Drink Selected";
+//    return View(drink);
+//}
