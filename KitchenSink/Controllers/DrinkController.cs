@@ -31,7 +31,11 @@ namespace KitchenSink.Controllers
         //TODO: pass this to home controller to eventually make call to DB 
 
         //public async Task<List<Drink>> GetDrink(string alcohol)
+<<<<<<< Updated upstream
     
+=======
+        //=======
+>>>>>>> Stashed changes
         public async Task<IActionResult> GetDrink(string alcohol)
         {
             List<Drink> drinkList = new List<Drink>();

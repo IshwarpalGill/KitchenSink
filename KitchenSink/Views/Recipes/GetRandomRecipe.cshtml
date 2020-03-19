@@ -14,26 +14,32 @@
         <th style="text-align:left" class="align-middle"><h2>Category</h2></th>
     </tr>
 
-    <tr>
+    
         @foreach (var options in Model.extendedIngredients)
         {
-            <td> @options.original</td>
+<tr>
+	<td> @options.original</td>
+</tr>
         }
         @foreach (var step in Model.AnalyzedInstructions[0].steps)
         {
-            <td>
-                @step.number<br>
-                @foreach (var ingred in step.ingredients)
-                {
-                    @ingred.name<br />
-                }<br>
-                @step.step<br>
-            </td>
+<tr>
+    <td>
+        @step.number<br>
+        @foreach (var ingred in step.ingredients)
+        {
+            @ingred.name<br />
+        }<br>
+        </td>
+    <td>
+        @step.step<br>
+    </td>
+</tr>
         }
         <td><image src=@Model.Image></td>
-    </tr>
+    
 
-    <tr>
+    <tr><td></td>
     </tr>
 
 </table>

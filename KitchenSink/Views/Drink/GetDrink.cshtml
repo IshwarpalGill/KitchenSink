@@ -70,6 +70,6 @@
 </form>
 
 @* button to save Drink into the database and to send to Movie view? *@
-@*<form  asp-controller="Home" asp-action="" class="float-right">
-    <button type="button" onclick="location.href='@Url.Action("Save","Home", @Model)'"></button>
-</form>*@
+<section class="float-right">
+    <button type="button" onclick="location.href='@Url.Action("SaveRecipeResults", "SaveResults")'" class="form-control btn-success col-12 col-6">Save</button>
+</section>
