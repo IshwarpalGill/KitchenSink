@@ -42,5 +42,5 @@
 </section>
 <br />
 <section>
-    <button onclick="location.href='@Url.Action("SaveRecipeResults", "SaveResults")'" class="form-control btn-success col-12 col-6">Save</button>
+    <button onclick="location.href='@Url.Action("SaveRecipeResults", "SaveUserChoice", new { Model.Id, Model.Title})'" class="form-control btn-success col-12 col-6">Save</button>
 </section>
