@@ -7,40 +7,40 @@
 @model Recipes
 <!--This table is used to display the data from the list-->
 <table class=" table table-striped">
-    <tr><font color="white">@Model.Title</font></tr>
+    <tr>color="white">@Model.Title</></tr>
     <tr>
         <th style="text-align:left" class="align-middle"><h2>Recipe Ingredients</h2></th>
         <th style="text-align:left" class="align-middle"><h2>Recipe Name</h2></th>
         <th style="text-align:left" class="align-middle"><h2>Category</h2></th>
     </tr>
 
-    
-        @foreach (var options in Model.extendedIngredients)
+
+    @foreach (var options in Model.extendedIngredients)
         {
-<tr>
-	<td> @options.original</td>
-</tr>
+    <tr>
+        <td> @options.original</td>
+    </tr>
         }
-        @foreach (var step in Model.AnalyzedInstructions[0].steps)
+    @foreach (var step in Model.AnalyzedInstructions[0].steps)
         {
-<tr>
-    <td>
-        @step.number<br>
-        @foreach (var ingred in step.ingredients)
+    <tr>
+        <td>
+            @step.number<br>
+            @foreach (var ingred in step.ingredients)
         {
             @ingred.name<br />
         }<br>
         </td>
-    <td>
-        @step.step<br>
-    </td>
-</tr>
-        }
-        <td><image src=@Model.Image></td>
-    
-
-    <tr><td></td>
+        <td>
+            @step.step<br>
+        </td>
     </tr>
+        }
+    <image src=@Model.Image>
+
+        <tr>
+            <td></td>
+        </tr>
 
 </table>
 <section>
@@ -48,5 +48,5 @@
 </section>
 <br />
 <section>
-    <button onclick="location.href='@Url.Action("SaveRecipeResults", "SaveUserChoice", new { Model.Id, Model.Title})'" class="form-control btn-success col-12 col-6">Save</button>
+    <button onclick="location.href='@Url.Action("SaveRecipeResults", "SaveUserChoice", new {intId = Model.Id})'" class="form-control btn-success col-12 col-6">Save</button>
 </section>

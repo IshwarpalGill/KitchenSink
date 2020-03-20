@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using KitchenSink.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -12,10 +13,11 @@ namespace KitchenSink.Controllers
     {
         KitchenSinkDBContext db = new KitchenSinkDBContext();
         UserPreferences preferences = new UserPreferences();
+        Recipes recipes = new Recipes();
 
         // SAVE RECIPES
         [Authorize]
-        public IActionResult SaveRecipeResults()
+        public IActionResult SaveRecipeResults(int intId)
         {
             db.UserPreferences.Add(new UserPreferences()
             {

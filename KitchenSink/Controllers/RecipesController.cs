@@ -30,10 +30,6 @@ namespace KitchenSink.Controllers
             return View();
         }
 
-        //TODO: When we return the recipe, save the cuisine
-
-        //TODO: pass this to home controller to eventually make call to DB
-
         public async Task<IActionResult> GetRandomRecipe(string protein, string starch, string veggie, string spice, string aromatic)
         {
             var SpoonApiKey = _config["SpoonacularApiKey"];
@@ -75,17 +71,17 @@ namespace KitchenSink.Controllers
 
                     //-----This will allow us to pass the matching cuisine from the Recipe Object anywhere we need
 
-                    foreach (Cuisine cus in db.Cuisine)
-                    {
-                        if (recipes2.cuisines.Contains(cus.Cuisine1))
-                        {
+                    //foreach (Cuisine cus in db.Cuisine)
+                    //{
+                    //    if (recipes2.cuisines.Contains(cus.Cuisine1))
+                    //    {
 
-                        }
-                        else
-                        {
+                    //    }
+                    //    else
+                    //    {
 
-                        }
-                    }
+                    //    }
+                    //}
 
                     //-----
 
