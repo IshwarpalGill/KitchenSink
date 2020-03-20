@@ -31,10 +31,13 @@ namespace KitchenSink.Controllers
         //TODO: pass this to home controller to eventually make call to DB 
 
         //public async Task<List<Drink>> GetDrink(string alcohol)
+        
 
         public async Task<IActionResult> GetDrink(string alcohol)
         {
             List<Drink> drinkList = new List<Drink>();
+            //try catch added for an ingredient is added that does not match api, api returns a null id number.
+            //the catch just returns it to the Drink view (where they input ingredients)
             try
             {
                 using (var httpClient = new HttpClient())
