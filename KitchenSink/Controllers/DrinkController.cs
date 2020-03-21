@@ -29,37 +29,44 @@ namespace KitchenSink.Controllers
         //TODO: pass this to home controller to eventually make call to DB 
 
         //public async Task<List<Drink>> GetDrink(string alcohol)
+        
 
-    
-        //Stashed changes
         public async Task<IActionResult> GetDrink(string alcohol)
         {
             List<Drink> drinkList = new List<Drink>();
-           
-            using (var httpClient = new HttpClient())
+            //try catch added for an ingredient is added that does not match api, api returns a null id number.
+            //the catch just returns it to the Drink view (where they input ingredients)
+            try
             {
-
-                using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={alcohol}"))
+                using (var httpClient = new HttpClient())
                 {
-                    var stringResponse = await response.Content.ReadAsStringAsync();
 
-                    //drinks = JsonSerializer.Deserialize<DrinkArray>(stringResponse);
-                    jDoc = JsonDocument.Parse(stringResponse);
-                    var jsonList = jDoc.RootElement.GetProperty("drinks");
-                    for (int i = 0; i < jsonList.GetArrayLength(); i++)
+                    using (var response = await httpClient.GetAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={alcohol}"))
                     {
-                        drinkList.Add(new Drink()
-                        {
-                            Id = jsonList[i].GetProperty("idDrink").GetString(),
-                            Name = jsonList[i].GetProperty("strDrink").GetString(),
-                            Image = jsonList[i].GetProperty("strDrinkThumb").GetString()
-                        });
-                    }
-                }
+                        var stringResponse = await response.Content.ReadAsStringAsync();
 
-                //var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
-                //string drinkID = chosenDrink.Id;
-                //RndDrink(drinkList);
+                        //drinks = JsonSerializer.Deserialize<DrinkArray>(stringResponse);
+                        jDoc = JsonDocument.Parse(stringResponse);
+                        var jsonList = jDoc.RootElement.GetProperty("drinks");
+                        for (int i = 0; i < jsonList.GetArrayLength(); i++)
+                        {
+                            drinkList.Add(new Drink()
+                            {
+                                Id = jsonList[i].GetProperty("idDrink").GetString(),
+                                Name = jsonList[i].GetProperty("strDrink").GetString(),
+                                Image = jsonList[i].GetProperty("strDrinkThumb").GetString()
+                            });
+                        }
+                    }
+
+                    //var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
+                    //string drinkID = chosenDrink.Id;
+                    //RndDrink(drinkList);
+                }
+            }
+            catch(Exception)
+            {
+                return View("Drink");
             }
             Drink drink = new Drink();
             var chosenDrink = drinkList[random.Next(0, drinkList.Count)];
