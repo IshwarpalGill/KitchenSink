@@ -21,11 +21,11 @@ namespace KitchenSink.Controllers
         {
             db.UserPreferences.Add(new UserPreferences()
             {
-                SavedRecipe = preferences.SavedRecipe
-            });
+                SavedRecipe = intId.ToString()
+            }); ;
             db.SaveChanges();
 
-            return View();
+            return View("Views/Drink/Drink.cshtml");
         }
         // EXCLUDE RECIPES
         [Authorize]
@@ -41,15 +41,15 @@ namespace KitchenSink.Controllers
         }
         //// SAVE DRINK
         [Authorize]
-        public IActionResult SaveDrinkResults()
+        public IActionResult SaveDrinkResults(int intId)
         {
             db.Add(new UserPreferences()
             {
-                SavedDrink = preferences.SavedDrink
+                SavedDrink = intId.ToString()
             });
             db.SaveChanges();
 
-            return View();
+            return RedirectToAction("GetRandomMovie", "Movie");
         }
 
         // EXCLUDE DRINK

@@ -135,6 +135,12 @@ namespace KitchenSink.Models
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.AspNetUsers)
+                    .HasForeignKey<AspNetUsers>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AspNetUsers_UserPrefs");
             });
 
             modelBuilder.Entity<Cuisine>(entity =>
@@ -201,12 +207,6 @@ namespace KitchenSink.Models
                     .IsFixedLength();
 
                 entity.Property(e => e.SavedRecipe).HasMaxLength(50);
-
-                entity.HasOne(d => d.Customer)
-                    .WithOne(p => p.UserPreferences)
-                    .HasForeignKey<UserPreferences>(d => d.CustomerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserPreferences_UserPreferences");
             });
 
             OnModelCreatingPartial(modelBuilder);

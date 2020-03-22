@@ -30,7 +30,7 @@ namespace KitchenSink.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetRandomRecipe(string protein, string starch, string veggie, string spice, string aromatic)
+        public async Task<IActionResult> GetRandomRecipe(string protein = null, string starch = null, string veggie=null, string spice=null, string aromatic=null)
         {
             var SpoonApiKey = _config["SpoonacularApiKey"];
             using (var httpClient = new HttpClient())
