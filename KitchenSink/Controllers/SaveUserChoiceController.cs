@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using KitchenSink.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace KitchenSink.Controllers
 {
@@ -13,19 +15,26 @@ namespace KitchenSink.Controllers
     {
         KitchenSinkDBContext db = new KitchenSinkDBContext();
         UserPreferences preferences = new UserPreferences();
-        Recipes recipes = new Recipes();
+        AspNetUsers users = new AspNetUsers();
+        
+
 
         // SAVE RECIPES
         [Authorize]
         public IActionResult SaveRecipeResults(int intId)
         {
-            db.UserPreferences.Add(new UserPreferences()
+            if (users.Email == User.Identity.Name)
             {
-                SavedRecipe = intId.ToString()
-            }); ;
-            db.SaveChanges();
+                db.UserPreferences.Add(new UserPreferences()
+                {
+                    SavedRecipe = intId.ToString(),
+                    CustomerId = users.Id
+                });
 
+                db.SaveChanges();
+            }
             return View("Views/Drink/Drink.cshtml");
+
         }
         // EXCLUDE RECIPES
         [Authorize]
@@ -43,9 +52,11 @@ namespace KitchenSink.Controllers
         [Authorize]
         public IActionResult SaveDrinkResults(int intId)
         {
+
             db.Add(new UserPreferences()
             {
-                SavedDrink = intId.ToString()
+                SavedDrink = intId.ToString(),
+                CustomerId = User.Identity.GetHashCode().ToString()
             });
             db.SaveChanges();
 
