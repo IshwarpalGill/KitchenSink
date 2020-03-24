@@ -14,6 +14,6 @@ namespace KitchenSink.Models
         public string SavedRecipe { get; set; }
         public string SavedDrink { get; set; }
 
-        public virtual AspNetUsers Customer { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

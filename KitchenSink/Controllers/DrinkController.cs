@@ -20,22 +20,6 @@ namespace KitchenSink.Controllers
         {
             return View();
         }
-        //<<<<<<< Updated upstream
-
-
-        //TODO: Change GetDrink to be dynamic using ingredients returned from user input (similar to recipe)
-
-        //TODO: When we return the drink, save the category 
-        // for the drink, Ish made it so the category is part of the Drink Model. 
-
-        //TODO: pass this to home controller to eventually make call to DB 
-
-        //public async Task<List<Drink>> GetDrink(string alcohol)
-<<<<<<< Updated upstream
-    
-=======
-        //=======
->>>>>>> Stashed changes
         public async Task<IActionResult> GetDrink(string alcohol)
         {
             List<Drink> drinkList = new List<Drink>();
