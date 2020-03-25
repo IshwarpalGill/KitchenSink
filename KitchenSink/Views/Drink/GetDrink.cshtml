@@ -41,7 +41,7 @@
     </tr>
     <tr>
         @* display the model (drink model in this case) information *@
-        <td>@Model.Name <br /><img src=@Model.Image /preview width="200" height="200"/></td>
+        <td>@Model.Name <br /><img src=@Model.Image width="200" height="200"/></td>
         <td>
             @Model.strMeasure1 @Model.strIngredient1<br />
             @Model.strMeasure2 @Model.strIngredient2<br />
@@ -65,11 +65,11 @@
 </table>
 
 @* button to reload page and get new recipe *@
-<form >
+<form class="float-left">
     <button onClick="window.location.reload();">New Drink</button>
 </form>
 
 @* button to save Drink into the database and to send to Movie view? *@
 <section class="float-right">
-    <button type="button" onclick="location.href='@Url.Action("SaveRecipeResults", "SaveResults")'" class="form-control btn-success col-12 col-6">Save</button>
+    <button type="button" onclick="location.href='@Url.Action("SaveDrinkResults", "SaveUserChoice", new { intId = Model.Id})'" class="form-control btn-success col-12 col-6">Save</button>
 </section>

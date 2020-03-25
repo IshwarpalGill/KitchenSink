@@ -27,8 +27,11 @@ namespace KitchenSink.Models
         
         [JsonPropertyName("analyzedInstructions")]
         public Analyzedinstruction[] AnalyzedInstructions { get; set; }
+       
+        [JsonPropertyName("missedIngredients")]
         public MissedIngredients[] missedIngredients { get; set; }
-
+        
+        [JsonPropertyName("extendedIngredients")]
         public Extendedingredient[] extendedIngredients { get; set; }
     }
 

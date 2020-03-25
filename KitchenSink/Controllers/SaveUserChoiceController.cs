@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using KitchenSink.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace KitchenSink.Controllers
 {
@@ -12,18 +15,26 @@ namespace KitchenSink.Controllers
     {
         KitchenSinkDBContext db = new KitchenSinkDBContext();
         UserPreferences preferences = new UserPreferences();
+        AspNetUsers users = new AspNetUsers();
+        
+
 
         // SAVE RECIPES
         [Authorize]
-        public IActionResult SaveRecipeResults()
+        public IActionResult SaveRecipeResults(int intId)
         {
-            db.UserPreferences.Add(new UserPreferences()
+            if (users.Email == User.Identity.Name)
             {
-                SavedRecipe = preferences.SavedRecipe
-            });
-            db.SaveChanges();
+                db.UserPreferences.Add(new UserPreferences()
+                {
+                    SavedRecipe = intId.ToString(),
+                    CustomerId = users.Id
+                });
 
-            return View();
+                db.SaveChanges();
+            }
+            return View("Views/Drink/Drink.cshtml");
+
         }
         // EXCLUDE RECIPES
         [Authorize]
@@ -39,15 +50,17 @@ namespace KitchenSink.Controllers
         }
         //// SAVE DRINK
         [Authorize]
-        public IActionResult SaveDrinkResults()
+        public IActionResult SaveDrinkResults(int intId)
         {
+
             db.Add(new UserPreferences()
             {
-                SavedDrink = preferences.SavedDrink
+                SavedDrink = intId.ToString(),
+                CustomerId = User.Identity.GetHashCode().ToString()
             });
             db.SaveChanges();
 
-            return View();
+            return RedirectToAction("GetRandomMovie", "Movie");
         }
 
         // EXCLUDE DRINK

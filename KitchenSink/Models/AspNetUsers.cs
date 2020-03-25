@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KitchenSink.Models
 {
@@ -12,7 +14,6 @@ namespace KitchenSink.Models
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
         }
-
         public string Id { get; set; }
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }
