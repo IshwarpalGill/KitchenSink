@@ -16,26 +16,26 @@
 
 
     @foreach (var options in Model.extendedIngredients)
-        {
+    {
     <tr>
         <td> @options.original</td>
     </tr>
-        }
+    }
     @foreach (var step in Model.AnalyzedInstructions[0].steps)
-        {
+    {
     <tr>
         <td>
             @step.number<br>
             @foreach (var ingred in step.ingredients)
-        {
+            {
             @ingred.name<br />
-        }<br>
+            }<br>
         </td>
         <td>
             @step.step<br>
         </td>
     </tr>
-        }
+    }
     <image src=@Model.Image>
 
         <tr>
@@ -48,5 +48,5 @@
 </section>
 <br />
 <section>
-    <button onclick="location.href='@Url.Action("SaveRecipeResults", "SaveUserChoice", new {intId = Model.Id})'" class="form-control btn-success col-12 col-6">ON TO THE DRINK</button>
+    <button onclick="location.href='@Url.Action("SetRecipeData", "SaveUserChoice", new { recipeIntId = Model.Id, recipeCusine = Model.cuisines})'" class="form-control btn-success col-12 col-6">ON TO THE DRINK</button>
 </section>

@@ -83,8 +83,6 @@ namespace KitchenSink.Controllers
                     //    }
                     //}
 
-                    //-----
-
                     return View(recipes2);
                 }
             }
