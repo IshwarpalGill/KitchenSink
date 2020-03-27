@@ -25,27 +25,38 @@ namespace KitchenSink.Controllers
         // SAVE RECIPES
         [Authorize]
 
-        //public string SetRecipeData(int recipeIntId, string[] recipeCusine)
-        //{
-        //    Recipes userRecipe = new Recipes();
-        //    userRecipe.Id = recipeIntId;
-        //    List<string> cusineList = new List<string>();
+        public string SetRecipeData(int recipeIntId, string[] recipeCusine)
+        {
+            Recipes userRecipe = new Recipes();
+            userRecipe.Id = recipeIntId;
+            List<string> cusineList = new List<string>();
+            List<string> dbList = new List<string>();
 
-        //    foreach (var x in recipeCusine)
-        //    {
-        //        cusineList.Add(x);
-        //    }
-        //    if (cusineList.Count > 0)
-        //    {
-        //        chosenCusine = cusineList[random.Next(cusineList.Count)];
-        //    }
-        //    else
-        //    {
-        //        chosenCusine = "american";
-        //    }
+            foreach(var y in db.Cuisine)
+            {
+                dbList.Add(y.Cuisine1);
+            }
 
-        //    return (chosenCusine);
-        //}
+            foreach (var x in recipeCusine)
+            {
+                cusineList.Add(x);
+            }
+
+            if (cusineList.Count > 0)
+            {
+                chosenCusine = cusineList[random.Next(cusineList.Count)];
+            }
+            if (dbList.Contains(chosenCusine))
+            {
+                return (chosenCusine);
+            }
+            else
+            {
+                chosenCusine = "american";
+            }
+
+            return (chosenCusine);
+        }
 
         public IActionResult SaveRecipeResults(int recipeIntId)
         {

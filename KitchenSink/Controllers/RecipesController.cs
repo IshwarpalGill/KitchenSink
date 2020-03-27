@@ -69,20 +69,6 @@ namespace KitchenSink.Controllers
 
                     var recipes2 = JsonSerializer.Deserialize<Recipes>(stringResponse2.ToString());
 
-                    //-----This will allow us to pass the matching cuisine from the Recipe Object anywhere we need
-
-                    //foreach (Cuisine cus in db.Cuisine)
-                    //{
-                    //    if (recipes2.cuisines.Contains(cus.Cuisine1))
-                    //    {
-
-                    //    }
-                    //    else
-                    //    {
-
-                    //    }
-                    //}
-
                     return View(recipes2);
                 }
             }
