@@ -67,6 +67,7 @@ namespace KitchenSink.Controllers
                 {
                     drinkId = d.Id;
                 }
+                //for when a drinkCategory is returned that does not match database
                 else
                 {
                     drinkId = random.Next(1,6);
@@ -78,6 +79,7 @@ namespace KitchenSink.Controllers
                 {
                     cuisineId = c.Id;
                 }
+                //for when a cuisine is returned that does not match database
                 else
                 {
                     cuisineId = random.Next(1,8);
