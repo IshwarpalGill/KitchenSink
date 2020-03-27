@@ -6,47 +6,38 @@
 <!--We use razor to help collect the list that has been passed to us from the Home Controller-->
 @model Recipes
 <!--This table is used to display the data from the list-->
-<table class=" table table-striped">
-    <tr>color="white">@Model.Title</></tr>
-    <tr>
-        <th style="text-align:left" class="align-middle"><h2>Recipe Ingredients</h2></th>
-        <th style="text-align:left" class="align-middle"><h2>Recipe Name</h2></th>
-        <th style="text-align:left" class="align-middle"><h2>Category</h2></th>
-    </tr>
+    <div class="row-md-12">
+        <p class="recipe-header">@Model.Title</p>
+        <image src=@Model.Image class="recipe-image">
 
+            <div class="cold-md-4 scrollable-container ingredient-list-container">
 
-    @foreach (var options in Model.extendedIngredients)
-        {
-    <tr>
-        <td> @options.original</td>
-    </tr>
-        }
-    @foreach (var step in Model.AnalyzedInstructions[0].steps)
-        {
-    <tr>
-        <td>
-            @step.number<br>
-            @foreach (var ingred in step.ingredients)
-        {
-            @ingred.name<br />
-        }<br>
-        </td>
-        <td>
-            @step.step<br>
-        </td>
-    </tr>
-        }
-    <image src=@Model.Image>
-
-        <tr>
-            <td></td>
-        </tr>
-
-</table>
+                <h2>Ingredients</h2>
+                @foreach (var options in Model.extendedIngredients)
+                {
+                    <ul class="ingedient-list">
+                        <l1 class="ingedient-list-item"> @options.original</l1>
+                    </ul>
+                }
+            </div>
+            <div class="scrollable-container">
+                @foreach (var step in Model.AnalyzedInstructions[0].steps)
+                {
+                    <ul class="recipe-list">
+                        <li class="recipe-list-item">
+                            @foreach (var ingred in step.ingredients)
+                            {
+                                @step.step
+                            }
+                        </li>
+                    </ul>
+                }
+            </div>
+    </div>
 <section>
-    <button onclick="window.location.reload();" class="form-control btn-primary col-12 col-6">NAH, TRY AGAIN</button>
+    <button onclick="window.location.reload();" class="form-control recipe-button col-12 col-6">Mmmm...new recipe.</button>
 </section>
 <br />
 <section>
-    <button onclick="location.href='@Url.Action("SaveRecipeResults", "SaveUserChoice", new {intId = Model.Id})'" class="form-control btn-success col-12 col-6">ON TO THE DRINK</button>
+    <button onclick="location.href='@Url.Action("SaveRecipeResults", "SaveUserChoice", new {intId = Model.Id})'" class="form-control recipe-button col-12 col-6">Onto the DRANKS</button>
 </section>
