@@ -16,30 +16,61 @@ namespace KitchenSink.Controllers
         KitchenSinkDBContext db = new KitchenSinkDBContext();
         UserPreferences preferences = new UserPreferences();
         AspNetUsers users = new AspNetUsers();
-        
+        int recipeIntId = 0;
+        int intId = 0;
+        string chosenCusine = string.Empty;
+        Random random = new Random();
 
 
         // SAVE RECIPES
         [Authorize]
-        public IActionResult SaveRecipeResults(int intId)
-        {
-            if (users.Email == User.Identity.Name)
-            {
-                db.UserPreferences.Add(new UserPreferences()
-                {
-                    SavedRecipe = intId.ToString(),
-                    CustomerId = users.Id
-                });
 
-                db.SaveChanges();
-            }
-            return View("Views/Drink/Drink.cshtml");
+        //public string SetRecipeData(int recipeIntId, string[] recipeCusine)
+        //{
+        //    Recipes userRecipe = new Recipes();
+        //    userRecipe.Id = recipeIntId;
+        //    List<string> cusineList = new List<string>();
+
+        //    foreach (var x in recipeCusine)
+        //    {
+        //        cusineList.Add(x);
+        //    }
+        //    if (cusineList.Count > 0)
+        //    {
+        //        chosenCusine = cusineList[random.Next(cusineList.Count)];
+        //    }
+        //    else
+        //    {
+        //        chosenCusine = "american";
+        //    }
+
+        //    return (chosenCusine);
+        //}
+
+        public IActionResult SaveRecipeResults(int recipeIntId)
+        {
+            Recipes recipes = new Recipes();
+            recipes.Id = recipeIntId;
+
+            users = db.AspNetUsers.Where(user => user.Email == User.Identity.Name.ToString()).FirstOrDefault();
+
+            db.UserPreferences.Add(new UserPreferences()
+            {
+                SavedRecipe = recipeIntId.ToString(),
+                //CustomerId = users.Id
+            });
+
+            //db.SaveChanges();
+
+            return View("Views/Drink/Drink.cshtml", recipeIntId);
 
         }
         // EXCLUDE RECIPES
         [Authorize]
         public IActionResult ExcludeRecipeResult()
         {
+            users = db.AspNetUsers.Where(user => user.Email == User.Identity.Name.ToString()).FirstOrDefault();
+
             db.UserPreferences.Add(new UserPreferences()
             {
                 ExcludedCuisine = preferences.ExcludedCuisine
@@ -52,13 +83,16 @@ namespace KitchenSink.Controllers
         [Authorize]
         public IActionResult SaveDrinkResults(int intId)
         {
+            users = db.AspNetUsers.Where(user => user.Email == User.Identity.Name.ToString()).FirstOrDefault();
 
             db.Add(new UserPreferences()
             {
                 SavedDrink = intId.ToString(),
-                CustomerId = User.Identity.GetHashCode().ToString()
+                CustomerId = users.Id
             });
             db.SaveChanges();
+
+            Compiler();
 
             return RedirectToAction("GetRandomMovie", "Movie");
         }
@@ -97,6 +131,25 @@ namespace KitchenSink.Controllers
             {
                 ExcludedGenre = preferences.ExcludedGenre
             });
+            db.SaveChanges();
+
+            return View();
+        }
+
+        public IActionResult Compiler()
+        {
+            Recipes recipes = new Recipes();
+            recipes.Id = recipeIntId;
+
+            users = db.AspNetUsers.Where(user => user.Email == User.Identity.Name.ToString()).FirstOrDefault();
+
+            db.UserPreferences.Add(new UserPreferences()
+            {
+                SavedRecipe = recipeIntId.ToString(),
+                SavedDrink = intId.ToString(),
+                CustomerId = users.Id
+            });
+
             db.SaveChanges();
 
             return View();
