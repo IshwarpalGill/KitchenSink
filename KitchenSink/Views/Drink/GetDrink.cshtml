@@ -33,7 +33,7 @@
             }
         </table>*@
 
-<table class=" table table-striped">
+<table class="table table-striped">
     <tr>
         <th>Cocktail</th>
         <th>Ingredients</th>
@@ -71,5 +71,5 @@
 
 @* button to save Drink into the database and to send to Movie view? *@
 <section class="float-right">
-    <button type="button" onclick="location.href='@Url.Action("ToSaveDrink", "SaveUserChoice", new { drinkId = Model.Id, dCategory = Model.Category})'" class="form-control btn-success col-12 col-6">Save</button>
+    <button type="button" onclick="location.href='@Url.Action("ToSaveDrink", "SaveUserChoice", new { drinkId = Model.Id, dCategory = Model.Category})'" class="form-control btn-success col-12 col-6">Get Movie Recommendation</button>
 </section>

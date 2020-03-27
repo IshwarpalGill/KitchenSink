@@ -50,10 +50,32 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 .drink-header, .recipe-header {
+    font-family: Bellota;
     font-size: 40px;
     color: oldlace;
-    font-weight: 400;
+    font-weight: 500;
     padding-bottom: 20px;
+}
+
+.movie-header {
+    font-family: Playfair Display;
+    font-weight: 200;
+    font-size: 20px;
+    color: black;
+}
+
+.movie-text {
+    font-family: Playfair Display;
+    font-size: 16px;
+    color: black;
+}
+
+.drink-sub-header {
+    font-family: Bellota Text;
+    font-weight: 200;
+    font-size: 24px;
+    color: oldlace;
+    font-weight: 400;
 }
 
 .recipe-image {

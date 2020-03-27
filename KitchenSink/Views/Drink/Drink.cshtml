@@ -3,11 +3,11 @@
     ViewData["Title"] = "Drink";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>Drink</h1>
+<p class="drink-header">Drink</p>
 <form asp-controller="Drink" asp-action="GetDrink" class="float-left">
     <div>
-        <label class="form-group"><font color="white">Enter Ingredient</font></label><br />
-        <input type="text" name="alcohol" required><br />
+        <label class="form-group drink-sub-header">Enter Ingredient</label><br />
+        <input type="text" name="alcohol" required style="margin-bottom:10px"><br />
         <input type="submit" value="Submit"><br />
     </div>
 </form>
