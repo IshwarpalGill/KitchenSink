@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace KitchenSink.Models
 {
@@ -15,6 +13,7 @@ namespace KitchenSink.Models
         public string SavedMovie { get; set; }
         public string SavedRecipe { get; set; }
         public string SavedDrink { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
+
+        public virtual AspNetUsers Customer { get; set; }
     }
 }

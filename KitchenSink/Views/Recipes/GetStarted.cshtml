@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "GetStarted";
+    ViewData["Title"] = "Recipe";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,31 +8,37 @@
         <div class="col-md-4">
             <form method="post" asp-controller="Recipes" asp-action="GetRandomRecipe">
                 <div class="form-group">
-                    <label>Protein</label>
+                    <label class="input-label">Protein</label>
                     <input type="text" name="protein" class="form-control" />
                     <span class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label>Starch</label>
+                    <label class="input-label">Starch</label>
                     <input type="text" name="starch" class="form-control" />
                     <span class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label>Veggies</label>
+                    <label class="input-label">Veggies</label>
                     <input type="text" name="veggies" class="form-control" />
                     <span class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label>Spices</label>
+                    <label class="input-label">Spices</label>
                     <input type="text" name="spices" class="form-control" />
                     <span class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label>Aromatic</label>
+                    <label class="input-label">Aromatic</label>
                     <input type="text" name="aromatic" class="form-control" />
                     <span class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Next</button>
+                <button class="next-button" type="submit">Next</button>
             </form>
+        </div>
+        <div class="col-md-8">
+            <div class="recipe-text">
+                <h2 class="recipe-header">Every recipe consists of 5 main components: a protein, a veggie, a starch, spices and aromatics (onion, garlic).</h2>
+                <h3>Take a look around the kitchen and enter something for as many of these 5 items as you can. </h3>
+            </div>
         </div>
     </div>

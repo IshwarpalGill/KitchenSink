@@ -25,6 +25,72 @@ for details on configuring this project to bundle and minify static web assets. 
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
+.next-button {
+    background-color: oldlace;
+    font-family: Bellota Text;
+    font-weight: 200;
+    border-radius: 3px;
+    border: none;
+    font-size: 20px;
+    width: 150px;
+    height: auto;
+    margin-top: 10px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.recipe-text {
+    text-align: center;
+    padding-top: 30px;
+    margin-left: 20px;
+    font-size: 24px;
+    color: oldlace;
+    font-weight: 200;
+}
+
+.drink-header, .recipe-header {
+    font-size: 40px;
+    color: oldlace;
+    font-weight: 400;
+    padding-bottom: 20px;
+}
+
+.recipe-image {
+    border-radius: 10px;
+    max-width: 500px;
+    margin-left: 75px;
+    margin-bottom: 50px;
+}
+
+.recipe-button {
+    background-color: oldlace;
+    font-family: Bellota Text;
+    font-weight: 200;
+    border-radius: 3px;
+    border: none;
+    font-size: 18px;
+}
+
+.recipe-list {
+    list-style: none;
+    font-family: Bellota Text;
+}
+
+.ingredient-list {
+    font-size: 24px;
+}
+
+.ingredient-list-container {
+    float: left;
+}
+
+.scrollable-container {
+    height: 75%;
+    overflow-y: auto;
+    color: oldlace;
+}
+
 body {
     background-image: url(https://www.furninova.com/sites/default/files/styles/social_media/public/fur/en/product/paso-doble-night/lifestyle-images/paso-doble-without-joy-chair.jpg?itok=pUgKQvdm)
 }
@@ -46,6 +112,11 @@ body {
     font-weight: 400;
     font-size: 18px;
     padding-top: 18px;
+}
+
+.input-label {
+    font-family: Bellota Text;
+    color: white;
 }
 a.navbar-brand {
     white-space: normal;

@@ -13,11 +13,12 @@ namespace KitchenSink.Controllers
     {
         private JsonDocument jDoc;
         Random random = new Random();
-        
+        UserItems newItems = new UserItems();
         DrinkArray drinks = new DrinkArray();
         
-        public IActionResult Drink()
+        public IActionResult Drink(UserItems Items)
         {
+            newItems = Items;
             return View();
         }
 
@@ -226,6 +227,13 @@ namespace KitchenSink.Controllers
                 }
             }
             return View("GetDrink", drink);
+        }
+
+        public IActionResult ToSaveDrink(string drinkID, string Category)
+        {
+            newItems.DrinkId = drinkID;
+            string drinkCategory = Category;
+            return RedirectToAction("ToSaveDrink", "SaveUserChoice", newItems, drinkCategory);
         }
 
         //public IActionResult shuffle(string alcohol)
