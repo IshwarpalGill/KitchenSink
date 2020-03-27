@@ -26,6 +26,7 @@ namespace KitchenSink.Models
         public virtual DbSet<Drinks> Drinks { get; set; }
         public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<Recommendation> Recommendation { get; set; }
+        public virtual DbSet<UserItems> UserItems { get; set; }
         public virtual DbSet<UserPreferences> UserPreferences { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -135,12 +136,6 @@ namespace KitchenSink.Models
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.AspNetUsers)
-                    .HasForeignKey<AspNetUsers>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_AspNetUsers_UserPrefs");
             });
 
             modelBuilder.Entity<Cuisine>(entity =>
@@ -190,6 +185,35 @@ namespace KitchenSink.Models
                     .HasConstraintName("FK_Recommendation_Cuisine");
             });
 
+            modelBuilder.Entity<UserItems>(entity =>
+            {
+                entity.HasKey(e => e.UserItems1);
+
+                entity.Property(e => e.UserItems1)
+                    .HasColumnName("UserItems")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.DrinkId)
+                    .HasColumnName("DrinkID")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.MovieId)
+                    .HasColumnName("MovieID")
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
+                entity.Property(e => e.RecipeId)
+                    .HasColumnName("RecipeID")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.UserId).HasMaxLength(450);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserItems)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_UserItems_AspNetUsers");
+            });
+
             modelBuilder.Entity<UserPreferences>(entity =>
             {
                 entity.HasKey(e => e.CustomerId);
@@ -207,6 +231,12 @@ namespace KitchenSink.Models
                     .IsFixedLength();
 
                 entity.Property(e => e.SavedRecipe).HasMaxLength(50);
+
+                entity.HasOne(d => d.Customer)
+                    .WithOne(p => p.UserPreferences)
+                    .HasForeignKey<UserPreferences>(d => d.CustomerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserPreferences_AspNetUsers");
             });
 
             OnModelCreatingPartial(modelBuilder);

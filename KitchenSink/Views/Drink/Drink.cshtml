@@ -5,23 +5,24 @@
 }
 
 <h1>Drink</h1>
-
+<p style="display: none;">@ViewBag.rCuisine</p>
 <form asp-controller="Drink" asp-action="GetDrink" class="float-left">
     <div>
         <label class="form-group"><font color="white">Enter Ingredient</font></label><br />
-        <input type="text" name="alcohol" required><br/>
+        <input type="text" name="alcohol" required><br />
         <input type="submit" value="Submit"><br />
     </div>
-</form><br />
+</form>
+<br />
 
 <div class="float-right">
-    <form asp-controller="Drink" asp-action="RndNonAlc" >
+    <form asp-controller="Drink" asp-action="RndNonAlc">
         <div>
             <input type="submit" value="Random Non-Alcoholic Drink"><br />
         </div>
     </form>
     <div> </div><br />
-    <form asp-controller="Drink" asp-action="RndAlc" >
+    <form asp-controller="Drink" asp-action="RndAlc">
         <div style=”margin-bottom:5px”>
             <input type="submit" value="Random Alcoholic Drink"><br />
         </div>

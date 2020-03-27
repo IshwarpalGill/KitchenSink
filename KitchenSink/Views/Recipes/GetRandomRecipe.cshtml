@@ -48,5 +48,5 @@
 </section>
 <br />
 <section>
-    <button onclick="location.href='@Url.Action("SaveRecipeResults", "SaveUserChoice", new {intId = Model.Id})'" class="form-control btn-success col-12 col-6">ON TO THE DRINK</button>
+    <button onclick="location.href='@Url.Action("ToSaveRecipe", "SaveUserChoice", new {recipeId = Model.Id, cuisine = Model.cuisines})'" class="form-control btn-success col-12 col-6">ON TO THE DRINK</button>
 </section>
